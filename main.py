@@ -17,12 +17,12 @@ def main():
         os.system("pause")
         exit(1)
 
-    print("========== Starfield Save File Importer v0.0.7 ==========")
+    print("========== Oblivion Remaster Save File Importer v1.0.0 based on Starfield Save File Importer v0.0.7 ==========")
     print("WARNING: This tool is experimental. Always manually back up your existing saves!")
     print()
 
     # 1. find the container
-    package_path = os.path.expandvars(r"%LOCALAPPDATA%\Packages\BethesdaSoftworks.ProjectGold_3275kfvn8vcwc")
+    package_path = os.path.expandvars(r"%LOCALAPPDATA%\Packages\BethesdaSoftworks.ProjectAltar_3275kfvn8vcwc")
     if not os.path.exists(package_path):
         print("Error: Could not find the package path. Make sure you have Xbox Starfield installed.")
         os.system("pause")
@@ -55,7 +55,16 @@ def main():
     print(f"  Package name: {container_index.package_name}")
     print(f"  {len(container_index.containers)} containers:")
     for container in container_index.containers:
-        print(f"    {container.container_name} ({container.size} bytes)")
+        print("Container Details:")
+        print(f"  Name: {container.container_name}")
+        print(f"  Cloud ID: {container.cloud_id}")
+        print(f"  Sequence: {container.seq}")
+        print(f"  Flag: {container.flag}")
+        print(f"  UUID: {container.container_uuid}")
+        print(f"  Modified Time: {container.mtime.to_timestamp()}")
+        print(f"  Size: {container.size} bytes")
+        print(f"  UUID to bytes: {container.container_uuid.bytes_le.hex().upper()}")
+        print()
     print()
 
     # 3. read the source save file
@@ -70,7 +79,7 @@ def main():
 
     # 3.2 check if the save file already exists
     for container in container_index.containers:
-        if container.container_name == f"Saves/{save_file_name}":
+        if container.container_name == f"{save_file_name}":
             print(f"Error: Save file already exists: {container.container_name}")
             os.system("pause")
             exit(5)
@@ -84,13 +93,13 @@ def main():
     for blob_index in range(total_blobs):
         blob_data = source_save_file.read(0x1000000)
         blob_crc = crccheck.crc.Crc32Jamcrc.calc(blob_data, 0)
-        files.append(ContainerFile(f"BlobData{blob_index}", uuid.uuid4(), blob_data))
-        toc += f"BlobData{blob_index}:{blob_crc};"
-    files.append(ContainerFile("toc", uuid.uuid4(), toc.encode()))
+        files.append(ContainerFile(f"Data", uuid.uuid4(), blob_data))
+    #     toc += f"BlobData{blob_index}:{blob_crc};"
+    # files.append(ContainerFile("toc", uuid.uuid4(), toc.encode()))
     container_file_list = ContainerFileList(seq=1, files=files)
 
     # 4.2 create container index entry
-    container_name = f"Saves/{save_file_name}"
+    container_name = f"{save_file_name}"
     container_uuid = uuid.uuid4()
     mtime = FILETIME.from_timestamp(os.path.getmtime(source_save_path))
     size = save_file_size + len(toc)
@@ -118,6 +127,14 @@ def main():
     os.makedirs(container_content_path, exist_ok=True)
     container_file_list.write_container(container_content_path)
     print(f"Wrote new container to {container_content_path}")
+
+
+    # Remove the 'saves_meta' container if it exists to force it to regenerate
+    container_index.containers = [
+        container for container in container_index.containers
+        if container.container_name != "saves_meta"
+    ]
+    print("Removed 'saves_meta' container if it existed.")
 
     # 4.6 write container index
     container_index.write_file(container_path)

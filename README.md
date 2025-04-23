@@ -1,4 +1,6 @@
-# Starfield XGP Save Importer
+# Oblivion Remaster XGP Save Importer
+
+Forked from [Starfield XGP Save Importer by HarukaMa](https://github.com/HarukaMa/starfield-xgp-import)
 
 An experimental tool to import .sfs savefiles into XGP savefile container.
 
@@ -14,6 +16,6 @@ Or just drop the .sfs file onto the executable from releases.
 
 ## Path references
 
-Steam version: `Documents\My Games\Starfield\Saves`
+Steam version: `Documents\My Games\Oblivion Remastered\Saves`
 
-Xbox version: `%LOCALAPPDATA%\Packages\BethesdaSoftworks.Starfield_3275kfvn8vcwc\SystemAppData\wgs`
+Xbox version: `%LOCALAPPDATA%\Packages\BethesdaSoftworks.ProjectAltar_3275kfvn8vcwc\SystemAppData\wgs`
