@@ -74,7 +74,8 @@ def main():
         os.system("pause")
         exit(4)
     source_save_file = open(source_save_path, "rb")
-    save_file_name = os.path.basename(source_save_path)
+    save_file_name = os.path.basename(source_save_path).removesuffix(".sav").replace(" ", "").replace(",","").replace(".","")
+    print(f"Cleaned save file name: {save_file_name}")
     save_file_size = os.path.getsize(source_save_path)
 
     # 3.2 check if the save file already exists
