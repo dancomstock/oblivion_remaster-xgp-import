@@ -12,7 +12,7 @@ from container_types import ContainerIndex, NotSupportedError, ContainerFile, Co
 
 
 def main():
-    print("========== Oblivion Remaster Save File Importer v1.0.0 based on Starfield Save File Importer v0.0.7 ==========")
+    print("========== Oblivion Remastered Save File Importer v1.0.0 based on Starfield Save File Importer v0.0.7 ==========")
     print("WARNING: This tool is experimental. Always manually back up your existing saves!")
     print()
     if len(sys.argv) != 2:

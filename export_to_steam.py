@@ -8,7 +8,7 @@ from sys import exit
 from container_types import ContainerIndex, NotSupportedError
 
 def main():
-    print("========== Oblivion Remaster Save File Exporter v1.0.0 based on Starfield Save File Importer v0.0.7 ==========")
+    print("========== Oblivion Remastered Save File Exporter v1.0.0 based on Starfield Save File Importer v0.0.7 ==========")
     print("WARNING: This tool is experimental. Always manually back up your existing saves!")
     print()
     parser = argparse.ArgumentParser(description="Export save files from Xbox Game Pass to Steam.")

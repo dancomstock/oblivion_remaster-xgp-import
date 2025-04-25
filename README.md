@@ -1,4 +1,4 @@
-# Oblivion Remaster Game Pass Save Manager
+# Oblivion Remastered Game Pass Save Manager
 
 Forked from [Starfield XGP Save Importer by HarukaMa](https://github.com/HarukaMa/starfield-xgp-import)
 
