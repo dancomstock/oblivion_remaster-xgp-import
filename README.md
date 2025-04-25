@@ -1,4 +1,4 @@
-# Oblivion Remaster XGP Save Importer
+# Oblivion Remaster Game Pass Save Manager
 
 Forked from [Starfield XGP Save Importer by HarukaMa](https://github.com/HarukaMa/starfield-xgp-import)
 
@@ -7,10 +7,10 @@ An experimental tool to manage .sav savefiles in XGP savefile containers. This t
 ## Usage
 
 ### Import Save Files
-To import a save file into the XGP savefile container (GamePass):
+To import a save file into the XGP savefile container (Game Pass):
 
 ```
-$ python import.py <path to .sav file>
+$ python import_to_game_pass.py <path to .sav file>
 ```
 
 Or just drop the `.sav` file onto the executable from releases.
@@ -24,12 +24,12 @@ To export save files from the XGP savefile container to a Steam-compatible forma
 
 For interactive mode:
 ```
-python export.py
+python export_to_steam.py
 ```
 
 Or:
 ```
-$ python export.py [--source <source path>] [--destination <destination path>]
+$ python export_to_steam.py [--source <source path>] [--destination <destination path>]
 ```
 
 - `--source`: Path to the Xbox Game Pass save files (default: `%LOCALAPPDATA%\Packages\BethesdaSoftworks.ProjectAltar_3275kfvn8vcwc`).
